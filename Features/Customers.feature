@@ -7,7 +7,7 @@ Given User Launch Chrome browser
 	And Click on Login 
 	Then User can view Dashboad 
 	
-#@regression
+@regression
 Scenario: Add New Customer
 
 	When User click on customers Menu 
@@ -17,7 +17,6 @@ Scenario: Add New Customer
 	When User enter customer info 
 	And click on Save button 
 	Then User can view confirmation message "The new customer has been added successfully." 
-	And close browser
 
 	@regression
 	Scenario: Search Customer by Email
@@ -27,7 +26,6 @@ Scenario: Add New Customer
 	And Enter customer EMail
 	When Click on search button
 	Then User should found Email in the Search table
-	And close browser 
 	
 	@regression
 	Scenario: Search Customer by Name
@@ -38,4 +36,3 @@ Scenario: Add New Customer
 	And Enter customer LastName
 	When Click on search button
 	Then User should found Name in the Search table
-	And close browser 

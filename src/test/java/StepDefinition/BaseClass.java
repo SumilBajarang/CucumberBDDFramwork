@@ -20,7 +20,7 @@ public class BaseClass {
 		return(RandomStringUtils.randomAlphabetic(5));
 	}
 	
-	//hard wait
+	//method for hard wait
 	public void hardWait(int wait) {
 		try {
 			Thread.sleep(wait*1000);
