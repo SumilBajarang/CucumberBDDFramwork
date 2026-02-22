@@ -1,61 +1,54 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.*;
-import pages.LoginPage;
-
-import java.time.Duration;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 import base.BaseClass;
+import io.cucumber.java.After;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Steps extends BaseClass {
 
-	LoginPage loginPage;
+    private LoginPage loginPage;
+    private HomePage homePage;
 
-	@Given("the user is on the nopCommerce login page")
-	public void navigateToLoginPage() {
-		  this.driver = new ChromeDriver();
-	        this.driver.manage().window().maximize();
-	        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://demo.nopcommerce.com");
+    @Given("the user is on the nopCommerce login page")
+    public void navigateToLoginPage() {
+        initializeDriver();
+        openApplication("https://demo.nopcommerce.com/");
 
-		// Initialize the LoginPage object with the driver
-		this.loginPage = new LoginPage(driver);
-		driver.get("https://demo.nopcommerce.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().window().maximize();
-		driver.findElement(By.xpath("//a[normalize-space()='Log in']")).click();
-	}
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
 
-	@When("the user enters valid credentials \\(username: {string}, password: {string})")
-	public void the_user_enters_valid_credentials_username_password(String user, String pwd) {
+        loginPage.clickLoginMenu();
+    }
 
-		driver.findElement(By.xpath("//input[@id='Email']")).sendKeys(user);
-		driver.findElement(By.xpath("//input[@id='Password']")).sendKeys(pwd);
+    @When("the user enters valid credentials \\(username: {string}, password: {string})")
+    public void theUserEntersValidCredentials(String user, String pwd) {
+        loginPage.enterEmail(user);
+        loginPage.enterPassword(pwd);
+    }
 
-	}
+    @When("the user clicks on the Login button")
+    public void theUserClicksOnTheLoginButton() {
+        loginPage.clickLoginButton();
+    }
 
-	@When("the user clicks on the Login button")
-	public void the_user_clicks_on_the_login_button() {
+    @Then("the user should be redirected to the My Account page")
+    public void theUserShouldBeRedirectedToTheMyAccountPage() {
+        Assert.assertTrue(homePage.isMyAccountLinkDisplayed(), "My account link is not displayed after login.");
+    }
 
-		driver.findElement(By.xpath("//button[normalize-space()='Log in']")).click();
-	}
+    @Then("the user should see a welcome message")
+    public void theUserShouldSeeAWelcomeMessage() {
+        Assert.assertTrue(homePage.isWelcomeTextDisplayed(), "Welcome message is not displayed.");
+    }
 
-	@Then("the user should be redirected to the My Account page")
-	public void the_user_should_be_redirected_to_the_my_account_page() {
-		boolean status = driver.findElement(By.xpath("//a[@class='ico-account']")).isDisplayed();
-		Assert.assertEquals(status, true);
-	}
-
-	@Then("the user should see a welcome message")
-	public void the_user_should_see_a_welcome_message() {
-		boolean welcometext = driver.findElement(By.xpath("//h2[normalize-space()='Welcome to our store']"))
-				.isDisplayed();
-		Assert.assertEquals(welcometext, true);
-		driver.quit();
-	}
-
+    @After
+    public void tearDown() {
+        closeBrowser();
+    }
 }
