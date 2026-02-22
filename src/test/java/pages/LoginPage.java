@@ -20,6 +20,7 @@ public class LoginPage {
     }
 
     public void clickLogin() {
+        System.out.println("Attempting to click the login button");
         WaitUtils.waitForClickable("//button[normalize-space()='Log in']").click();
     }
 }
