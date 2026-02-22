@@ -2,27 +2,15 @@ package stepdefinitions;
 
 import org.testng.Assert;
 
-import base.BaseClass;
-import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.HomePage;
-import pages.LoginPage;
 
-public class Steps extends BaseClass {
-
-    private LoginPage loginPage;
-    private HomePage homePage;
+public class LoginSteps extends BaseSteps {
 
     @Given("the user is on the nopCommerce login page")
     public void navigateToLoginPage() {
-        initializeDriver();
-        openApplication("https://demo.nopcommerce.com/");
-
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
-
+        launchApplication();
         loginPage.clickLoginMenu();
     }
 
@@ -45,10 +33,5 @@ public class Steps extends BaseClass {
     @Then("the user should see a welcome message")
     public void theUserShouldSeeAWelcomeMessage() {
         Assert.assertTrue(homePage.isWelcomeTextDisplayed(), "Welcome message is not displayed.");
-    }
-
-    @After
-    public void tearDown() {
-        closeBrowser();
     }
 }
