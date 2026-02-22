@@ -17,7 +17,9 @@ public class Steps extends BaseClass {
 
 	@Given("the user is on the nopCommerce login page")
 	public void navigateToLoginPage() {
-		setup(); // Call the browser initialization from BaseClass
+		  this.driver = new ChromeDriver();
+	        this.driver.manage().window().maximize();
+	        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://demo.nopcommerce.com");
 
 		// Initialize the LoginPage object with the driver
