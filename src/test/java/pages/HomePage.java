@@ -3,22 +3,20 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage {
-
-    private final WebDriver driver;
+public class HomePage extends BasePage {
 
     private final By myAccountLink = By.xpath("//a[@class='ico-account']");
     private final By welcomeText = By.xpath("//h2[normalize-space()='Welcome to our store']");
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public boolean isMyAccountLinkDisplayed() {
-        return driver.findElement(myAccountLink).isDisplayed();
+        return isDisplayed(myAccountLink);
     }
 
     public boolean isWelcomeTextDisplayed() {
-        return driver.findElement(welcomeText).isDisplayed();
+        return isDisplayed(welcomeText);
     }
 }
