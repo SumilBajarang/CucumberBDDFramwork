@@ -10,7 +10,9 @@ public class LoginSteps extends BaseSteps {
 
     @Given("the user is on the nopCommerce login page")
     public void navigateToLoginPage() {
-        launchApplication();
+        if (driver == null) {
+            launchApplication();
+        }
         loginPage.clickLoginMenu();
     }
 
