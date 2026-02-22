@@ -1,15 +1,25 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.By;
+
+import framework.driver.DriverManager;
+import framework.utils.WaitUtils;
 
 public class LoginPage {
 
-	WebDriver driver;
+    private By emailInput = By.xpath("//input[@id='Email']");
+    private By passwordInput = By.xpath("//input[@id='Password']");
+    private By loginButton = By.xpath("//button[normalize-space()='Log in']");
 
-	public LoginPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this); 
-	}
+    public void enterEmail(String email) {
+        WaitUtils.waitForVisible("//input[@id='Email']").sendKeys(email);
+    }
 
+    public void enterPassword(String password) {
+        WaitUtils.waitForVisible("//input[@id='Password']").sendKeys(password);
+    }
+
+    public void clickLogin() {
+        WaitUtils.waitForClickable("//button[normalize-space()='Log in']").click();
+    }
 }
