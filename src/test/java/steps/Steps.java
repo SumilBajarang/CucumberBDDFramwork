@@ -1,4 +1,4 @@
-package stepdefinitions;
+package steps;
 
 import io.cucumber.java.en.*;
 import pages.LoginPage;
@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
-import base.BaseClass;
+import base.BaseTest;
 
-public class Steps extends BaseClass {
+public class Steps extends BaseTest {
 
 	LoginPage loginPage;
 
