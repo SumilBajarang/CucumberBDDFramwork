@@ -20,7 +20,6 @@ public class BaseSteps extends BaseClass {
     }
 
     @Given("the user initializes browser")
-    @Given("uuser initializes browser")
     public void theUserInitializesBrowser() {
         launchApplication();
     }
