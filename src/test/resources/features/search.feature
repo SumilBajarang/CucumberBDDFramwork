@@ -1,3 +1,4 @@
+@search
 Feature: Search functionality on nopCommerce
 
   Scenario: Search with valid product name
