@@ -1,31 +1,15 @@
 package stepdefinitions;
 
-import base.BaseClass;
-import io.cucumber.java.After;
-import io.cucumber.java.en.Given;
-import pages.HomePage;
-import pages.LoginPage;
+import base.DriverFactory;
+import context.TestContext;
 
-public class BaseSteps extends BaseClass {
+public abstract class BaseSteps {
 
-    protected LoginPage loginPage;
-    protected HomePage homePage;
-
-    protected void launchApplication() {
-        initializeDriver();
-        openApplication("https://demo.nopcommerce.com/");
-
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
+    protected TestContext context() {
+        return Hooks.getContext();
     }
 
-    @Given("the user initializes browser")
-    public void theUserInitializesBrowser() {
-        launchApplication();
-    }
-
-    @After
-    public void tearDown() {
-        closeBrowser();
+    protected String currentUrl() {
+        return DriverFactory.getDriver().getCurrentUrl();
     }
 }

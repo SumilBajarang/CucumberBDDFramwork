@@ -10,30 +10,22 @@ public class LoginSteps extends BaseSteps {
 
     @Given("the user is on the nopCommerce login page")
     public void navigateToLoginPage() {
-        if (driver == null) {
-            launchApplication();
-        }
-        loginPage.clickLoginMenu();
+        context().getLoginPage().openLoginForm();
     }
 
     @When("the user enters valid credentials \\(username: {string}, password: {string})")
     public void theUserEntersValidCredentials(String user, String pwd) {
-        loginPage.enterEmail(user);
-        loginPage.enterPassword(pwd);
-    }
-
-    @When("the user clicks on the Login button")
-    public void theUserClicksOnTheLoginButton() {
-        loginPage.clickLoginButton();
+        context().getLoginPage().loginAs(user, pwd);
     }
 
     @Then("the user should be redirected to the My Account page")
     public void theUserShouldBeRedirectedToTheMyAccountPage() {
-        Assert.assertTrue(homePage.isMyAccountLinkDisplayed(), "My account link is not displayed after login.");
+        Assert.assertTrue(context().getHomePage().isMyAccountLinkDisplayed(),
+                "My account link is not displayed after login. Current URL: " + currentUrl());
     }
 
     @Then("the user should see a welcome message")
     public void theUserShouldSeeAWelcomeMessage() {
-        Assert.assertTrue(homePage.isWelcomeTextDisplayed(), "Welcome message is not displayed.");
+        Assert.assertTrue(context().getHomePage().isWelcomeTextDisplayed(), "Welcome message is not displayed.");
     }
 }
