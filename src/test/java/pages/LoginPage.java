@@ -1,26 +1,15 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends BasePage {
+public class LoginPage {
 
-    private final By loginMenuLink = By.xpath("//a[normalize-space()='Log in']");
-    private final By emailTextbox = By.id("Email");
-    private final By passwordTextbox = By.id("Password");
-    private final By loginButton = By.xpath("//button[normalize-space()='Log in']");
+	WebDriver driver;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this); 
+	}
 
-    public void openLoginForm() {
-        click(loginMenuLink);
-    }
-
-    public void loginAs(String email, String password) {
-        type(emailTextbox, email);
-        type(passwordTextbox, password);
-        click(loginButton);
-    }
 }

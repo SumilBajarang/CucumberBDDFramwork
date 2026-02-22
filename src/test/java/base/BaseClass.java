@@ -1,10 +1,17 @@
 package base;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-public abstract class BaseClass {
+public class BaseClass {
+    public WebDriver driver;
 
-    protected WebDriver driver() {
-        return DriverFactory.getDriver();
+    public void setup() {
+        this.driver = new ChromeDriver();
+        this.driver.manage().window().maximize();
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
+
 }
